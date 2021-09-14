@@ -77,6 +77,7 @@ export default class Relationship {
     this.meta = null;
     this.hasData = false;
     this.hasLoaded = false;
+    this.isDirty = false;
     this.__inverseMeta = undefined;
   }
 
@@ -541,4 +542,6 @@ export default class Relationship {
 
   destroy() {
   }
+
+  rollback() {}
 }

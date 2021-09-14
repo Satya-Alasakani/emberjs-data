@@ -107,6 +107,7 @@ export default class BelongsToRelationship extends Relationship {
 
     this.inverseInternalModel = internalModel;
     super.addInternalModel(internalModel);
+    this.isDirty = this.canonicalState !== internalModel; // Checking if belongsTo was a internalModel, if not, set a dirty state on it.
     this.notifyBelongsToChanged();
   }
 
@@ -213,4 +214,8 @@ export default class BelongsToRelationship extends Relationship {
       this.setCanonicalInternalModel(internalModel);
     }
   }
+
+  rollback() {
+   this.setInternalModel(this.canonicalState);
+ }
 }

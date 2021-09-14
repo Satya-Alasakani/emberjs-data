@@ -800,6 +800,30 @@ export default class InternalModel {
   }
 
   /*
+     @method rollback
+     @public
+     @param {}
+     This method rolls back the attributes of the model as well as invokes the relationship rollback method.
+   */
+   rollback() {
+     this.rollbackAttributes();
+     this.rollbackRelationships();
+   }
+
+   /*
+     @method rollbackRelationships
+     @private
+     @param {}
+     This method iterates over the relationships of the model and rolls back the changes of its attributes.
+   */
+   rollbackRelationships() {
+     this.eachRelationship((name, relationship) => {
+       this._relationships.get(name).rollback();
+     });
+   }
+
+
+  /*
     @method transitionTo
     @private
     @param {String} name

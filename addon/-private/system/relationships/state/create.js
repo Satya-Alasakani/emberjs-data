@@ -73,4 +73,14 @@ export default class Relationships {
 
     return relationship;
   }
+
+  // This gives back the isDirty state of each relationship.
+ isDirty() {
+   var relationshipsByName = get(this.internalModel.type, 'relationshipsByName');
+   var keys = relationshipsByName._keys.toArray();
+
+   return keys.some((key) => {
+     return this.get(key).isDirty;
+   });
+ };
 }
